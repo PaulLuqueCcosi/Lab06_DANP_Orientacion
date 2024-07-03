@@ -14,12 +14,5 @@ import com.danp.lab06_orientacion.viewmodel.RotationViewModel
 @Composable
 fun MyApp(viewModel: RotationViewModel) {
     EquilateralTriangle(viewModel)
-    Button(
-        onClick = { viewModel.toggleRotationFixed() },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        Text(if (viewModel.isRotationFixed.value) "Fijado" else "Rotando")
-    }
+
 }
