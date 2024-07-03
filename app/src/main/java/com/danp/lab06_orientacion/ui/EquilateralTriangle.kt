@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.danp.lab06_orientacion.viewmodel.RotationViewModel
@@ -37,24 +38,33 @@ fun EquilateralTriangle(viewModel: RotationViewModel) {
 
         Canvas(
             modifier = Modifier
-                .size(200.dp)
+                .size(width = 200.dp, height = 250.dp) // Tamaño del Canvas como rectángulo (300dp de ancho y 200dp de alto)
                 .graphicsLayer(
-                    rotationZ = if (isRotationFixed.value) rotationAngle.value else 0f
-                )
+                    rotationZ = if (isRotationFixed.value) rotationAngle.value else 0f,
+
+                    transformOrigin = TransformOrigin.Center // Ajusta el punto de origen (x, y)
+
+        )
                 .background(Color.Yellow)
         ) {
-            // Dibujar el triángulo equilátero
+            // Dibujar el triángulo isósceles más grande y más arriba
             val width = size.width
             val height = size.height
-            val point1 = Offset(x = width / 2, y = 0f)
-            val point2 = Offset(x = 0f, y = height)
-            val point3 = Offset(x = width, y = height)
+            val baseWidth = width * 0.8f // Ancho de la base (80% del ancho total)
+            val baseOffset = (width - baseWidth) / 2 // Desplazamiento de la base
+
+            // Coordenadas de los vértices del triángulo
+            val point1 = Offset(x = baseOffset + baseWidth / 2, y = height * 0.0f) // Ajusta la altura del triángulo
+            val point2 = Offset(x = baseOffset, y = height)
+            val point3 = Offset(x = baseOffset + baseWidth, y = height)
+
             val trianglePath = Path().apply {
                 moveTo(point1.x, point1.y)
                 lineTo(point2.x, point2.y)
                 lineTo(point3.x, point3.y)
                 close()
             }
+
             drawPath(
                 path = trianglePath,
                 color = Color.Blue,
@@ -70,6 +80,8 @@ fun EquilateralTriangle(viewModel: RotationViewModel) {
                 center = Offset(centerX, centerY)
             )
         }
+
+
 
 
         // Botón al final de la pantalla
