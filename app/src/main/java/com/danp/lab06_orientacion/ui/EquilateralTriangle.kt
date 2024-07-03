@@ -42,7 +42,6 @@ fun EquilateralTriangle(viewModel: RotationViewModel) {
                     rotationZ = if (isRotationFixed.value) rotationAngle.value else 0f
                 )
                 .background(Color.Yellow)
-
         ) {
             // Dibujar el triángulo equilátero
             val width = size.width
@@ -59,6 +58,16 @@ fun EquilateralTriangle(viewModel: RotationViewModel) {
             drawPath(
                 path = trianglePath,
                 color = Color.Blue,
+            )
+
+            // Dibujar un círculo rojo en el centro del Canvas
+            val circleRadius = 20f // Radio del círculo
+            val centerX = size.width / 2 // Coordenada x del centro del Canvas
+            val centerY = size.height / 2 // Coordenada y del centro del Canvas
+            drawCircle(
+                color = Color.Red,
+                radius = circleRadius,
+                center = Offset(centerX, centerY)
             )
         }
 
