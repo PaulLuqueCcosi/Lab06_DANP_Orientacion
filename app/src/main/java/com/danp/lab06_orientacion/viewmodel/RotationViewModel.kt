@@ -13,7 +13,9 @@ import kotlinx.coroutines.flow.StateFlow
 class RotationViewModel(
     private val sensorManager: SensorManager
 ) : ViewModel() {
-    private val rotationSensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR)
+    private val rotationSensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) // esto se puede cambiar por otro
+    // https://developer.android.com/develop/sensors-and-location/sensors/sensors_position?hl=es-419
+
 
     private val sensorEventListener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
@@ -36,10 +38,8 @@ class RotationViewModel(
                 Log.d("VALOR3:", "" + roll3)
                 // Actualizar el ángulo de rotación en el ViewModel
                 _rotationAngle.value = roll1
+                // TODO: mejorar, no funcioan bien
             }
-//            for (i in event.values.indices) {
-//                Log.d("VALOR$i:", "" + event.values[i])
-//            }
         }
 
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
